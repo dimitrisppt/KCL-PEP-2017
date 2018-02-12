@@ -214,8 +214,6 @@ int main() {
         
     }
 
-    heap.print();
-
     {
         
         cout << "\nTest 7 - Creating one last object of size ";
