@@ -97,7 +97,7 @@ public:
 
         while (curr != nullptr) {
             if (curr->available) {
-                if (curr->size - rounded_requested >=0){
+                if (curr->size >= rounded_requested) {
                     if (worstFit != nullptr) {
                         if (curr->size < worstFit->size) {
                             worstFit = curr;
@@ -127,7 +127,7 @@ public:
             char * startAddress = sizeof(MemControlBlock) + worstFitPos;
             return startAddress;
         }
-
+        
         return nullptr;
 
     }
