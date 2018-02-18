@@ -155,7 +155,6 @@ public:
                 block->previous->size = block->previous->size + block->size + sizeof(MemControlBlock);
                 block->previous = block->next;
                 block->next = block->previous;
-                delete block;
 
             }
         }
@@ -166,7 +165,6 @@ public:
                 block->next->size = block->next->size + block->size + sizeof(MemControlBlock);
                 block->next = block->previous;
                 block->previous = block->previous;
-                delete block;
 
             }
         }
