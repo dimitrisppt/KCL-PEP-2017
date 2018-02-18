@@ -116,7 +116,6 @@ public:
     }
 
     MemControlBlock * worstFitAlg(int rounded_requested) {
-
         MemControlBlock * curr = startOfHeap;
         MemControlBlock * worstFit = nullptr;
         int maxBlockMem = 0;
