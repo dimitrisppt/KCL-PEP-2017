@@ -111,7 +111,6 @@ public:
             char * startAddress = sizeof(MemControlBlock) + worstFitPos;
             return startAddress;
         }
-
         return nullptr;
 
     }
