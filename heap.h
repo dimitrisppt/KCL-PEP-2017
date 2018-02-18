@@ -117,28 +117,24 @@ public:
     }
 
     MemControlBlock * worstFitAlg(int rounded_requested) {
+
         MemControlBlock * curr = startOfHeap;
         MemControlBlock * worstFit = nullptr;
-        do {
-            if (curr->available) {
-                if ((worstFit == nullptr) && (curr->size >= rounded_requested)) {
-                       worstFit = curr;
-                } else if (!(worstFit == nullptr) && (curr->size >= rounded_requested)) {
-                    if (curr->size < worstFit->size) {
+        int maxBlockMem = 0;
+
+        for (int i = 0; curr; ++i, curr = curr->next) {
+
+            if (curr->available == true) {
+                if (maxBlockMem < curr->size) {
+                    if (rounded_requested <= curr->size) {
                         worstFit = curr;
+                        maxBlockMem = curr->size;
                     }
                 }
             }
-            curr = curr->next;
-
-        } while (curr != nullptr);
+        }
         return worstFit;
     }
-
-
-
-
-
 
 
     /** @brief Deallocate the memory used by the object at the given address */
@@ -164,7 +160,7 @@ public:
 
                 block->next->size = block->next->size + block->size + sizeof(MemControlBlock);
                 block->next = block->previous;
-                block->previous = block->previous;
+                block->previous = block->next;
 
             }
         }
