@@ -92,7 +92,23 @@ public:
     char * allocateMemoryWorstFit(size_t requested) {
         int rounded_requested = (requested / 4) * 4;
 
-        MemControlBlock * worstFit = worstFitAlg(rounded_requested);
+        //MemControlBlock * worstFit = worstFitAlg(rounded_requested);
+
+        MemControlBlock * curr = startOfHeap;
+        MemControlBlock * worstFit = nullptr;
+        int maxBlockMem = 0;
+
+        for (int i = 0; curr; ++i, curr = curr->next) {
+
+            if (curr->available == true) {
+                if (maxBlockMem < curr->size) {
+                    if (rounded_requested <= curr->size) {
+                        worstFit = curr;
+                        maxBlockMem = curr->size;
+                    }
+                }
+            }
+        }
 
         if (worstFit != nullptr) {
             worstFit->available = false;
@@ -116,22 +132,22 @@ public:
     }
 
     MemControlBlock * worstFitAlg(int rounded_requested) {
-        MemControlBlock * curr = startOfHeap;
-        MemControlBlock * worstFit = nullptr;
-        int maxBlockMem = 0;
-
-        for (int i = 0; curr; ++i, curr = curr->next) {
-
-            if (curr->available == true) {
-                if (maxBlockMem < curr->size) {
-                    if (rounded_requested <= curr->size) {
-                        worstFit = curr;
-                        maxBlockMem = curr->size;
-                    }
-                }
-            }
-        }
-        return worstFit;
+        // MemControlBlock * curr = startOfHeap;
+        // MemControlBlock * worstFit = nullptr;
+        // int maxBlockMem = 0;
+        //
+        // for (int i = 0; curr; ++i, curr = curr->next) {
+        //
+        //     if (curr->available == true) {
+        //         if (maxBlockMem < curr->size) {
+        //             if (rounded_requested <= curr->size) {
+        //                 worstFit = curr;
+        //                 maxBlockMem = curr->size;
+        //             }
+        //         }
+        //     }
+        // }
+        // return worstFit;
     }
 
 
